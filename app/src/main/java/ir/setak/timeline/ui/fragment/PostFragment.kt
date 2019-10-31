@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.timeline.R
 import dagger.android.support.DaggerFragment
 import ir.setak.timeline.model.DummyContent
-import ir.setak.timeline.model.Item
+import ir.setak.timeline.model.PostV2
 import ir.setak.timeline.ui.adapter.PostAdapter
 
 /**
@@ -83,7 +83,7 @@ class PostFragment : DaggerFragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: Item?)
+        fun onListFragmentInteraction(item: PostV2?)
     }
 
     companion object {

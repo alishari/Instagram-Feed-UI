@@ -1,16 +1,13 @@
 package ir.setak.timeline.model
 
-/**
- * A model representing the content of post to show in recyclerview.
- */
-data class Item(val id: String, val content: String, val details: String) {
-    override fun toString(): String = content
-}
+import android.location.Location
 
 data class Header(
     val senderAvatarUrl: String,
     val senderName: String,
     val location: String,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
     val options: List<Option>
 )
 
@@ -31,12 +28,15 @@ data class PostContent(
 
 data class MediaDetails(
     val duration: Long,
-    val size: Long
+    val size: Long,
+    val width: Long,
+    val height: Long
 )
 
 data class PostV2(
     val id: String,
-    val header: Header
+    val header: Header,
+    val content: PostContent
 )
 
 enum class PostType {
