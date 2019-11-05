@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Timeline</string>
     <string name="more_dots">…</string>
-    <string name="read_more">Read more</string>
+    <string name="read_more">more</string>
     <string name="likes">%s likes</string>
 </resources>
