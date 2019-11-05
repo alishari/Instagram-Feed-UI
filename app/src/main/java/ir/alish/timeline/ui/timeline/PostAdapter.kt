@@ -90,21 +90,34 @@ class PostAdapter(
         likeCount.text =
             likeCount.context.getString(R.string.likes, NumberUtil.format(item.content.likeCount))
 
-        captionText.post {
-            setCaption(senderName, caption)
-            captionText.setOnClickListener {
-                captionText.let {
-                    it.maxLines = MAX_LINES
-                    it.text = getFullCaption(senderName, caption)
-                }
-            }
-        }
+        captionText.setExpandableText(senderName, caption)
+//        captionText.post {
+//            captionText.setCaption(senderName, caption)
+//            captionText.setOnClickListener {
+//                captionText.let {
+//                    it.maxLines = MAX_LINES
+//                    it.text = getFullCaption(senderName, caption)
+//                }
+//            }
+//        }
         with(mView) {
             tag = item
             setOnClickListener(mOnClickListener)
         }
 
         sendTime.text = TimeUtil.format(item.content.sendTime)
+    }
+
+    private fun TextView.setExpandableText(senderName: String, caption: String) {
+        post {
+            setCaption(senderName, caption)
+            setOnClickListener {
+                let {
+                    it.maxLines = MAX_LINES
+                    it.text = getFullCaption(senderName, caption)
+                }
+            }
+        }
     }
 
     private fun PostVH.setHeader(item: Post) {
@@ -114,7 +127,7 @@ class PostAdapter(
         gD.setColor(Color.LTGRAY)
         gD.shape = GradientDrawable.OVAL
 
-        senderAvatar.load(item.header.senderAvatarUrl){
+        senderAvatar.load(item.header.senderAvatarUrl) {
             crossfade(true)
             transformations(CircleCropTransformation())
             placeholder(gD)
@@ -157,19 +170,18 @@ class PostAdapter(
 
     }
 
-    private fun PostVH.setCaption(senderName: String, caption: String) {
-        val context = captionText.context
-        captionText.text = getFullCaption(senderName, caption)
+    private fun TextView.setCaption(senderName: String, caption: String) {
+        text = getFullCaption(senderName, caption)
 
-        if (captionText.lineCount > DEFAULT_LINES) {
-            val lastCharShown = captionText.layout.getLineVisibleEnd(DEFAULT_LINES - 1)
-            captionText.maxLines = DEFAULT_LINES
+        if (lineCount > DEFAULT_LINES) {
+            val lastCharShown = layout.getLineVisibleEnd(DEFAULT_LINES - 1)
+            maxLines = DEFAULT_LINES
             val moreString = context.getString(R.string.read_more)
             val suffix = " $moreString"
             // 3 is a "magic number" but it's just basically the length of the ellipsis we're going to insert
             val actionDisplayText = context.getString(R.string.more_dots) + suffix
 
-            captionText.text = SpannableStringBuilder()
+            text = SpannableStringBuilder()
                 .bold { append(senderName) }
                 .append("  ")
                 .append(
