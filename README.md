@@ -5,6 +5,7 @@ It is an implementation of Instagram Feed with Kotlin
 
 ## Expandable TextView
 I developed an expandable textview for description of images:
+
 <img src="https://github.com/alishari/Instagram-Feed/blob/master/screenshots/O9S9G258NO.png?raw=true" width="300">
 
 ## Used Libraries
