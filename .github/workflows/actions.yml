@@ -34,3 +34,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+      # Run 
+      - name: CLA assistant lite
+        uses: cla-assistant/github-action@v2.0.2-alpha
