@@ -8,7 +8,7 @@
         android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="500dp" />
+        android:minHeight="200dp"/>
 
     <include layout="@layout/post_actions" />
 

@@ -16,6 +16,8 @@ import androidx.core.text.bold
 import androidx.core.text.color
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.size.Precision
+import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import ir.alish.timeline.R
 import ir.alish.timeline.data.Post
@@ -77,12 +79,11 @@ class PostAdapter(
         val displayMetrics = DisplayMetrics()
         val activity = postImage.context as Activity
         activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val width = displayMetrics.widthPixels
 
-        postImage.minimumHeight =
-            (width.toFloat() * item.content.mediaDetails.height / item.content.mediaDetails.width).roundToInt() + 1
         postImage.load(item.content.mediaUrl) {
             crossfade(true)
+            precision(Precision.EXACT)
+            scale(Scale.FILL)
         }
 
         val senderName = item.header.senderName
@@ -91,15 +92,6 @@ class PostAdapter(
             likeCount.context.getString(R.string.likes, NumberUtil.format(item.content.likeCount))
 
         captionText.setExpandableText(senderName, caption)
-//        captionText.post {
-//            captionText.setCaption(senderName, caption)
-//            captionText.setOnClickListener {
-//                captionText.let {
-//                    it.maxLines = MAX_LINES
-//                    it.text = getFullCaption(senderName, caption)
-//                }
-//            }
-//        }
         with(mView) {
             tag = item
             setOnClickListener(mOnClickListener)
